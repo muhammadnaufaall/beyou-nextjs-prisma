@@ -1,7 +1,9 @@
+import AddPost from "./components/AddPost";
+
 export default function Home() {
   return (
     <main>
-      <h1>Hello TSX</h1>
+      <AddPost />
     </main>
-  )
+  );
 }
