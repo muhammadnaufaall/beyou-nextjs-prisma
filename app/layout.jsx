@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className='mx-4 md:mx48 xl:mx-96'>
+      <body className='mx-4 md:mx48 xl:mx-96 bg-gray-100'>
         <QueryWrapper>
           <Nav />
           {children}

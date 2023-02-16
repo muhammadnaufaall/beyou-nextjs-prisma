@@ -1,19 +1,43 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 export default function AddPost() {
   const [title, setTitle] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+  const queryClient = useQueryClient();
+  let toastPostID: string;
 
   const { mutate } = useMutation(
-    async (title) => await axios.post("/api/post/addPost", { title })
+    async (title: String) => await axios.post("/api/posts/addPost", { title }),
+    {
+      onError: (error) => {
+        setIsDisabled(false);
+        if (error instanceof AxiosError) {
+          toast.error(error?.response?.data?.message, { id: toastPostID });
+        }
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("AllPosts");
+        toast.success(data?.data?.message, { id: toastPostID });
+        setTitle("");
+        setIsDisabled(false);
+      },
+    }
   );
 
+  const submitPost = async (e: FormEvent) => {
+    e.preventDefault();
+    toastPostID = toast.loading("Creating an Awesome Post...");
+    setIsDisabled(true);
+    mutate(title);
+  };
+
   return (
-    <form className='bg-white mb-8 py-8 rounded-md '>
+    <form onSubmit={submitPost} className='bg-white mb-8 py-8 px-6 rounded-md '>
       <div className='flex flex-col my-4'>
         <textarea
           onChange={(e) => setTitle(e.target.value)}
