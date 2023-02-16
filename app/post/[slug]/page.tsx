@@ -6,19 +6,19 @@ import Post from "@/app/components/Post";
 import AddComment from "@/app/components/addComment";
 import { Key } from "react";
 
-type URL = {
-  params: {
-    slug: string;
-  };
-  searchParams: string;
-};
+// type URL = {
+//   params: {
+//     slug: string;
+//   };
+//   searchParams: string;
+// };
 
 const fetchDetails = async (slug: string) => {
   const res = await axios.get(`/api/posts/${slug}`);
   return res.data;
 };
 
-export default function DetailsPost(url: URL) {
+export default function DetailsPost(url: any) {
   const { data, isLoading } = useQuery({
     queryFn: () => fetchDetails(url.params.slug),
     queryKey: ["detailPost"],
