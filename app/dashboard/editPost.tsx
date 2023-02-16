@@ -14,7 +14,7 @@ type EditProps = {
   avatar: string;
   name: string;
   title: string;
-  comments?: {
+  comments: {
     id: string;
     postId: string;
     userId: string;
@@ -40,7 +40,7 @@ export default function EditPost({
         toast.error("Something went wrong.", { id: deleteToastID });
       },
       onSuccess: (data) => {
-        queryClient.invalidateQueries("myPosts");
+        queryClient.invalidateQueries(["myPosts"]);
         toast.success("Post has been deleted.", { id: deleteToastID });
       },
     }

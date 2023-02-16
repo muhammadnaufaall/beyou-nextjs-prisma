@@ -16,7 +16,7 @@ export default async function handler(
     // get user id
     const prismaUser = await prisma.user.findUnique({
       where: {
-        email: session?.user?.email,
+        email: session?.user?.email as string,
       },
     });
 
@@ -34,7 +34,7 @@ export default async function handler(
           message: title,
           postId,
           userId: prismaUser?.id,
-        },
+        } as any,
       });
       res.status(200).json({ message: "Comment Added 🥳", result });
     } catch (error) {

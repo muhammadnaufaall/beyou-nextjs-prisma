@@ -8,7 +8,7 @@ type PostProps = {
   name: string;
   avatar: string;
   postTitle: string;
-  comments?: {
+  comments: {
     createdAt: string;
     id: string;
     postId: string;

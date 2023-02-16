@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Post from "@/app/components/Post";
 import AddComment from "@/app/components/addComment";
+import { Key } from "react";
 
 type URL = {
   params: {
@@ -35,15 +36,28 @@ export default function DetailsPost(url: URL) {
         comments={data.Comment}
       />
       <AddComment id={data?.id} />
-      {data?.Comment.map((comment) => (
-        <Post
-          id={comment.id}
-          key={comment.id}
-          avatar={comment.user.image}
-          name={comment.user.name}
-          postTitle={comment.message}
-        />
-      ))}
+      {data?.Comment.map(
+        (comment: {
+          id: string;
+          user: { image: string; name: string };
+          message: string;
+          Comment: {
+            createdAt: string;
+            id: string;
+            postId: string;
+            userId: string;
+          }[];
+        }) => (
+          <Post
+            id={comment.id}
+            key={comment.id}
+            avatar={comment.user.image}
+            name={comment.user.name}
+            postTitle={comment.message}
+            comments={comment.Comment}
+          />
+        )
+      )}
     </main>
   );
 }

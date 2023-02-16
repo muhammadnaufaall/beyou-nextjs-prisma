@@ -16,7 +16,7 @@ export default async function handler(
     // get my posts
     try {
       const result = await prisma.user.findUnique({
-        where: { email: session?.user?.email },
+        where: { email: session?.user?.email as string },
         include: {
           Post: {
             orderBy: {

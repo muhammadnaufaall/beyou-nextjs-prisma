@@ -5,6 +5,8 @@ import axios from "axios";
 import EditPost from "./editPost";
 
 type AuthPosts = {
+  title: string;
+  Comment: { id: string; postId: string; userId: string }[];
   email: string;
   id: string;
   image: string;
@@ -17,7 +19,7 @@ type AuthPosts = {
       createdAt: string;
       id: string;
       postId: string;
-      title: string;
+      message: string;
       userId: string;
     }[];
   }[];
