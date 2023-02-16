@@ -4,14 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Post from "@/app/components/Post";
 import AddComment from "@/app/components/addComment";
-import { Key } from "react";
-
-// type URL = {
-//   params: {
-//     slug: string;
-//   };
-//   searchParams: string;
-// };
 
 const fetchDetails = async (slug: string) => {
   const res = await axios.get(`/api/posts/${slug}`);

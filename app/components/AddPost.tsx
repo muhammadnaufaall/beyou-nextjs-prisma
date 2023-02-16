@@ -21,7 +21,7 @@ export default function AddPost() {
         }
       },
       onSuccess: (data) => {
-        queryClient.invalidateQueries(["AllPosts"]);
+        queryClient.invalidateQueries(["allPost"]);
         toast.success(data?.data?.message, { id: toastPostID });
         setTitle("");
         setIsDisabled(false);
