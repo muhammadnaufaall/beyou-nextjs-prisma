@@ -1,5 +1,3 @@
-"use client";
-
 import "./globals.css";
 import Nav from "./components/Nav";
 import QueryWrapper from "./components/queryWrapper/QueryWrapper";
