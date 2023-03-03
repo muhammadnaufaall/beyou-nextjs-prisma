@@ -7,14 +7,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // get title
+  const title: string = req.body.title;
+
   if (req.method === "POST") {
     const session = await getServerSession(req, res, authOptions);
     if (!session) {
       res.status(401).json({ message: "Please Sign In to Make a Post" });
+    } else if (title.length < 1) {
+      res.status(403).json({ message: "please do not leave it empty ☹️" });
     }
-
-    // get title
-    const title: string = req.body.title;
 
     // get user id
     const prismaUser = await prisma.user.findUnique({
