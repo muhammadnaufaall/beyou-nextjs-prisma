@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Post from "@/app/components/Post";
 import AddComment from "@/app/components/addComment";
+import Loading from "@/app/components/Loading";
 
 const fetchDetails = async (slug: string) => {
   const res = await axios.get(`/api/posts/${slug}`);
@@ -15,7 +16,7 @@ export default function DetailsPost(url: any) {
     queryFn: () => fetchDetails(url.params.slug),
     queryKey: ["detailPost"],
   });
-  if (isLoading) return <h1>Post is loading...</h1>;
+  if (isLoading) return <Loading />;
   if (data) console.log(data);
   return (
     <main>
@@ -46,7 +47,6 @@ export default function DetailsPost(url: any) {
             avatar={comment.user.image}
             name={comment.user.name}
             postTitle={comment.message}
-            // comments={comment.Comment}
           />
         )
       )}
