@@ -50,27 +50,26 @@ export default function AddComment({ id }: PostProps) {
   };
 
   return (
-    <form onSubmit={submitComment} className='my-8'>
-      <h3 className='text-xl'>Add a comment</h3>
+    <form onSubmit={submitComment} className="my-8">
+      <h3 className="text-xl">Add a comment</h3>
 
-      <div className='flex flex-col my-2'>
-        <input
+      <div className="flex flex-col my-2">
+        <textarea
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-          type='text'
-          name='title'
-          className='p-4 text-base rounded-md my-2'
+          name="title"
+          className="p-4 text-base rounded-md my-2"
         />
       </div>
-      <div className='flex items-center justify-between gap-2'>
+      <div className="flex items-center justify-between gap-2">
         <p
           className={`font-bold  ${
             title.length > 300 ? "text-red-700" : "text-gray-700"
           } `}>{`${title.length}/300`}</p>
         <button
           disabled={isDisabled}
-          className=' text-sm bg-indigo-600 text-white py-2 px-6 rounded-xl disabled:opacity-25'
-          type='submit'>
+          className=" text-sm bg-indigo-600 text-white py-2 px-6 rounded-xl disabled:opacity-25"
+          type="submit">
           Add Comment 🚀
         </button>
       </div>
