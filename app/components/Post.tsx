@@ -8,7 +8,7 @@ type PostProps = {
   name: string;
   avatar: string;
   postTitle: string;
-  comments: {
+  comments?: {
     createdAt: string;
     id: string;
     postId: string;
@@ -28,29 +28,31 @@ export default function Post({
       animate={{ opacity: 1, scale: 1 }}
       initial={{ opacity: 0, scale: 0.8 }}
       transition={{ ease: "easeOut" }}
-      className='bg-white my-8 p-8 rounded-lg border border-indigo-600'>
-      <div className='flex items-center gap-2'>
+      className="bg-white my-8 p-8 rounded-lg border border-indigo-600">
+      <div className="flex items-center gap-2">
         <Image
-          className='rounded-full'
+          className="rounded-full"
           width={32}
           height={32}
           src={avatar}
-          alt='avatar'
+          alt="avatar"
         />
-        <h3 className='font-bold text-gray-700'>{name}</h3>
+        <h3 className="font-bold text-gray-700">{name}</h3>
       </div>
-      <div className='my-8 '>
-        <p className='break-all'>{postTitle}</p>
+      <div className="my-8 ">
+        <p className="break-all">{postTitle}</p>
       </div>
-      <div className='flex gap-4 cursor-pointer items-center'>
-        <Link href={`post/${id}`}>
-          <p className=' text-sm font-bold text-gray-700'>
-            {comments?.length >= 1
-              ? `${comments?.length} Comments`
-              : "No Comments Yet"}
-          </p>
-        </Link>
-      </div>
+      {comments && (
+        <div className="flex gap-4 cursor-pointer items-center">
+          <Link href={`post/${id}`}>
+            <p className=" text-sm font-bold text-gray-700">
+              {comments?.length >= 1
+                ? `${comments?.length} Comments`
+                : "No Comments Yet"}
+            </p>
+          </Link>
+        </div>
+      )}
     </motion.div>
   );
 }
