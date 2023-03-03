@@ -46,7 +46,7 @@ export default function DetailsPost(url: any) {
             avatar={comment.user.image}
             name={comment.user.name}
             postTitle={comment.message}
-            comments={comment.Comment}
+            // comments={comment.Comment}
           />
         )
       )}
