@@ -9,11 +9,11 @@ export default async function Nav() {
   const session = await getServerSession(authOptions);
 
   return (
-    <nav className='flex justify-between items-center py-8'>
+    <nav className="flex justify-between items-center py-8">
       <Link href={"/"}>
-        <h1 className='font-bold text-lg text-indigo-600'>BeYou.</h1>
+        <h1 className="font-bold text-lg text-indigo-600">BeYou.</h1>
       </Link>
-      <ul className='flex items-center gap-6'>
+      <ul className="flex items-center gap-6">
         {!session?.user && <Login />}
         {session?.user && <LoggedIn image={session.user?.image || ""} />}
       </ul>
