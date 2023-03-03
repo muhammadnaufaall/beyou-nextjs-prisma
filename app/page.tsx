@@ -4,6 +4,7 @@ import axios from "axios";
 import AddPost from "./components/AddPost";
 import { useQuery } from "@tanstack/react-query";
 import Post from "./components/Post";
+import Loading from "./components/Loading";
 
 type PostsType = {
   title: string;
@@ -33,14 +34,12 @@ export default function Home() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
     return <div>Error...</div>;
   }
-
-  console.log(data);
 
   return (
     <main>

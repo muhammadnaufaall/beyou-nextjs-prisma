@@ -13,7 +13,7 @@ export default async function Dashboard() {
   return (
     <main>
       <h1>
-        Welcome Back <b>{session.user?.name}</b>
+        Welcome Back <b>{session.user?.name}</b> this is all of your post!
       </h1>
       <MyPost />
     </main>
