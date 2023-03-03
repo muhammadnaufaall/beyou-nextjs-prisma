@@ -11,6 +11,18 @@ const fetchDetails = async (slug: string) => {
   return res.data;
 };
 
+type Comment = {
+  id: string;
+  user: { image: string; name: string };
+  message: string;
+  Comment: {
+    createdAt: string;
+    id: string;
+    postId: string;
+    userId: string;
+  }[];
+};
+
 export default function DetailsPost(url: any) {
   const { data, isLoading } = useQuery({
     queryFn: () => fetchDetails(url.params.slug),
@@ -29,27 +41,15 @@ export default function DetailsPost(url: any) {
         comments={data.Comment}
       />
       <AddComment id={data?.id} />
-      {data?.Comment.map(
-        (comment: {
-          id: string;
-          user: { image: string; name: string };
-          message: string;
-          Comment: {
-            createdAt: string;
-            id: string;
-            postId: string;
-            userId: string;
-          }[];
-        }) => (
-          <Post
-            id={comment.id}
-            key={comment.id}
-            avatar={comment.user.image}
-            name={comment.user.name}
-            postTitle={comment.message}
-          />
-        )
-      )}
+      {data?.Comment.map((comment: Comment) => (
+        <Post
+          id={comment.id}
+          key={comment.id}
+          avatar={comment.user.image}
+          name={comment.user.name}
+          postTitle={comment.message}
+        />
+      ))}
     </main>
   );
 }
