@@ -51,6 +51,7 @@ export default function Home() {
           name={post.user?.name}
           avatar={post?.user?.image}
           postTitle={post.title}
+          createdAt={post.createdAt}
           comments={post.Comment || []}
         />
       ))}

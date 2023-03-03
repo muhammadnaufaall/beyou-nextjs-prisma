@@ -2,12 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import moment from "moment";
 
 type PostProps = {
   id: string;
   name: string;
   avatar: string;
   postTitle: string;
+  createdAt?: string;
   comments?: {
     createdAt: string;
     id: string;
@@ -21,6 +23,7 @@ export default function Post({
   name,
   avatar,
   postTitle,
+  createdAt,
   comments,
 }: PostProps) {
   return (
@@ -29,7 +32,7 @@ export default function Post({
       initial={{ opacity: 0, scale: 0.8 }}
       transition={{ ease: "easeOut" }}
       className="bg-white my-8 p-8 rounded-lg border border-indigo-600">
-      <div className="flex items-center gap-2">
+      <div className="flex gap-3 items-center">
         <Image
           className="rounded-full"
           width={32}
@@ -37,9 +40,14 @@ export default function Post({
           src={avatar}
           alt="avatar"
         />
-        <h3 className="font-bold text-gray-700">{name}</h3>
+        <div className="flex flex-col">
+          <h3 className="font-bold text-gray-700">{name}</h3>
+          <p className="text-xs text-gray-500">
+            {moment(createdAt).calendar()}
+          </p>
+        </div>
       </div>
-      <div className="my-8 ">
+      <div className="my-8">
         <p className="break-all">{postTitle}</p>
       </div>
       {comments && (
