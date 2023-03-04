@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import moment from "moment";
+import ReactMarkdown from "react-markdown";
 
 type PostProps = {
   id: string;
@@ -48,7 +49,7 @@ export default function Post({
         </div>
       </div>
       <div className="my-8">
-        <p className="break-all">{postTitle}</p>
+        <ReactMarkdown>{postTitle}</ReactMarkdown>
       </div>
       {comments && (
         <div className="flex gap-4 cursor-pointer items-center">

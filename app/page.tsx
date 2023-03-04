@@ -3,6 +3,7 @@
 import axios from "axios";
 import AddPost from "./components/AddPost";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import Post from "./components/Post";
 import Loading from "./components/Loading";
 
@@ -28,6 +29,7 @@ const allPost = async () => {
 };
 
 export default function Home() {
+  const [count, setCount] = useState(10);
   const { data, isLoading, isError } = useQuery({
     queryFn: allPost,
     queryKey: ["allPost"],
@@ -44,7 +46,7 @@ export default function Home() {
   return (
     <main>
       <AddPost />
-      {data?.result.map((post: PostsType) => (
+      {data?.result.slice(0, count).map((post: PostsType, index: number) => (
         <Post
           key={post.id}
           id={post.id}
@@ -55,6 +57,14 @@ export default function Home() {
           comments={post.Comment || []}
         />
       ))}
+      <div className="flex justify-center p-10">
+        <button
+          disabled={data.result.length <= count}
+          className="text-sm bg-indigo-600 text-white py-2 px-6 rounded-xl disabled:opacity-25"
+          onClick={() => setCount(count + 10)}>
+          {data.result.length > count ? "Load Older Posts" : "It's old enough"}
+        </button>
+      </div>
     </main>
   );
 }
