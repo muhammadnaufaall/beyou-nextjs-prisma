@@ -60,9 +60,9 @@ export default function Home() {
       <div className="flex justify-center p-10">
         <button
           disabled={data.result.length <= count}
-          className="text-sm bg-indigo-600 text-white py-2 px-6 rounded-xl disabled:opacity-25"
+          className="px-6 py-2 text-sm text-white bg-indigo-600 rounded-xl disabled:opacity-25"
           onClick={() => setCount(count + 10)}>
-          {data.result.length > count ? "Load Older Posts" : "It's old enough"}
+          {data.result.length > count ? "Load Older Posts" : "No Other Posts"}
         </button>
       </div>
     </main>
